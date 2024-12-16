@@ -1,16 +1,41 @@
 "use strict";
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var src_exports = {};
+__export(src_exports, {
+  Aparat: () => Aparat
+});
+module.exports = __toCommonJS(src_exports);
+var import_node_events = require("events");
 
 // src/components/error.ts
-var error = class extends Error {
+var error_default = class extends Error {
   constructor(message) {
     super();
-    this.name = "aparat.js";
+    this.name = "AparatJS";
     this.message = message;
   }
 };
 
 // src/components/user.ts
-var User = class {
+var user_default = class {
   /**
    * 
    * @param {string} username 
@@ -20,11 +45,11 @@ var User = class {
    * 
    * @example
    * ```js
-   * const { API } = require("aparat.js");
-   * const api = new API();
+   * const { Aparat } = require("aparat.js");
+   * const aparat = new Aparat();
    * (async () => {
    *  // User information results.
-   *  const user = await api.user.search("shervinbdndev");
+   *  const user = await aparat.user.search("shervinbdndev");
    *  console.log(`Followers: ${user.followers.toLocaleString()}`);
    *  console.log(`Followings: ${user.followings.toLocaleString()}`);
    * })(); 
@@ -34,57 +59,57 @@ var User = class {
     async function results() {
       try {
         const url = "https://www.aparat.com/api/fa/v1/user/user/information/username/", url1 = "https://www.aparat.com/api/fa/v2/Live/LiveStream/show/username/", url2 = "https://www.aparat.com/etc/api/profile/username/", res = await fetch(url + username).then((res2) => res2.json()), res1 = await fetch(url2 + username).then((res2) => res2.json()), live = await fetch(url1 + username).then((res2) => res2.json()), user = res.data.attributes, user1 = res1.profile, results2 = {
-          description: String(user.description),
-          created_at: String(user.start_date),
-          followers: String(user.follower_cnt),
+          description: user.description,
+          created_at: user.start_date,
+          followers: user.follower_cnt,
           followers_int: Number(user1.follower_cnt),
-          followings: String(user.follow_cnt),
+          followings: user.follow_cnt,
           followings_int: Number(user1.followed_cnt),
           priority: String(user.priority),
           total_video: Number(user.video_cnt),
-          total_views: String(user.video_visit),
-          is_forkids: Boolean(user.show_kids_friendly == "no" ? false : true),
-          is_banned: Boolean(user.banned == "no" ? false : true),
-          is_official: Boolean(user1.official == "yes" ? true : false),
+          total_views: user.video_visit,
+          is_forkids: user.show_kids_friendly == "no" ? false : true,
+          is_banned: user.banned == "no" ? false : true,
+          is_official: user1.official == "yes" ? true : false,
           user: {
-            name: String(user.name),
-            username: String(user.username),
+            name: user.name,
+            username: user.username,
             id: Number(user.id),
-            hash_id: String(user.hash_user_id),
-            icon: user.pic_b ? String(user.pic_b) : null,
-            cover: user.cover_src ? String(user.cover_src) : null,
+            hash_id: user.hash_user_id,
+            icon: user.pic_b,
+            cover: user.cover_src,
             links: {
-              website: user1.url ? String(user1.url) : null,
-              twitter: user1.twitter ? String(user1.twitter) : null,
-              lenzor: user1.lenzor ? String(user1.lenzor) : null,
-              cloob: user1.cloob ? String(user1.cloob) : null,
-              facebook: user1.facebook ? String(user1.facebook) : null
+              website: user1.url,
+              twitter: user1.twitter,
+              lenzor: user1.lenzor,
+              cloob: user1.cloob,
+              facebook: user1.facebook
             }
           },
           live: {
-            is_live: Boolean(live.live_status.type === "connected" ? true : false),
-            url: String(`https://www.aparat.com/${user.username}/live`),
-            title: live.title ? String(live.title) : null,
-            description: live.descr ? String(live.descr.replace("<p>", "").replace("</p>", "")) : null,
-            cover: live.attributes?.cover ? String(live.attributes?.cover) : null,
-            donate_link: live.donate_link?.url ? String(live.donate_link?.url) : null,
-            last_start_date: live.last_session_start_tim ? String(live.last_session_start_time) : null,
-            last_end_date: live.last_session_end_time ? String(live.last_session_end_time) : null,
-            moderators: live.moderator_data ? Array(live.moderator_data) : null,
-            vip_users: live.vip_users ? Array(live.vip_users.map) : null,
+            is_live: live.live_status.type === "connected" ? true : false,
+            url: `https://www.aparat.com/${user.username}/live`,
+            title: live.title ? live.title : null,
+            description: live.descr ? live.descr.replace("<p>", "").replace("</p>", "") : null,
+            cover: live.live_status?.attributes?.cover,
+            donate_link: live.donate_link?.url,
+            last_start_date: live.last_session_start_time,
+            last_end_date: live.last_session_end_time,
+            moderators: live.moderator_data,
+            vip_users: live.vip_users,
             tag: {
               id: live.live_tag?.tag_id ? Number(live.live_tag?.tag_id) : null,
-              name: live.live_tag?.tag_name ? String(live.live_tag?.tag_name) : null,
-              type: live.live_tag?.tag_type ? String(live.live_tag?.tag_type) : null,
-              picture: live.live_tag?.pic ? String(live.live_tag?.pic) : null,
+              name: live.live_tag?.tag_name,
+              type: live.live_tag?.tag_type,
+              picture: live.live_tag?.pic,
               is_game: live.live_tag?.is_game ? Boolean(live.live_tag?.is_game) : null
             },
             category: {
               id: live.live_cat?.cat_id ? Number(live.live_cat?.cat_id) : null,
-              name: live.live_cat?.cat_name ? String(live.live_cat?.cat_name) : null
+              name: live.live_cat?.cat_name
             },
             chat: {
-              pined_message: live.chat_pin_message ? String(live.chat_pin_message) : null
+              pined_message: live.chat_pin_message
             }
           }
         };
@@ -92,7 +117,11 @@ var User = class {
       } catch (e) {
         if (e.stack.includes("Unexpected token"))
           return results();
-        throw new error("User not found OwO");
+        if (e.name.startsWith("TypeError: fetch failed"))
+          throw new error_default("Connection Error \n" + e);
+        if (e.name.startsWith('<!DOCTYPE html><html lang="fa"><head><title>\u062E\u0637\u0627 404 - \u0635\u0641\u062D\u0647 \u067E\u06CC\u062F\u0627 \u0646\u0634\u062F | \u0622\u067E\u0627\u0631\u0627\u062A</title>'))
+          throw new error_default("User not found OwO");
+        throw new error_default("Unexpected Error OwO\n" + e);
       }
     }
     ;
@@ -101,7 +130,7 @@ var User = class {
 };
 
 // src/components/video.ts
-var Video = class {
+var video_default = class {
   /**
    * 
    * @param {string} args 
@@ -111,106 +140,100 @@ var Video = class {
    * 
    * @example
    * ```js
-   * const { API } = require("aparat.js");
-   * const api = new API();
+   * const { Aparat } = require("aparat.js");
+   * const aparat = new Aparat();
    * (async () => {
    *  // Searched vidoe results.
-   *  const videos = await api.video.search("SpongBob");
+   *  const videos = await aparat.video.search("SpongBob");
    *  console.log(videos);
    * })(); 
    * ``` 
    */
-  search(args) {
-    async function results() {
+  async search(args) {
+    async function videos() {
       try {
-        let url = `https://www.aparat.com/api/fa/v1/video/video/search/text/${args}/?type_search=search`;
-        let res = await fetch(url).then((res2) => res2.json());
-        let results2 = [];
-        await res.included.forEach((element) => {
-          results2.push({
-            id: Number(element.attributes.id),
-            title: String(element.attributes.title),
-            description: String(element.attributes.description),
-            url: String(`https://www.aparat.com/v/${String(element.attributes.frame).replace("https://www.aparat.com/video/video/embed/videohash/", "").replace("/vt/frame", "")}`),
+        const url = `https://www.aparat.com/api/fa/v1/video/video/search/text/${args}/?type_search=search`, res = await fetch(url).then((res2) => res2.json()), results = [];
+        await res.included.forEach(async (element) => {
+          results.push({
+            id: element.attributes.id,
+            hash_id: element.attributes.uid,
+            title: element.attributes.title,
+            description: element.attributes.description,
+            url: `https://www.aparat.com/v/${element.attributes.uid}`,
             uploader: {
-              name: String(element.attributes.sender_name),
-              username: String(element.attributes.username),
-              id: Number(element.attributes.userid),
-              icon: String(element.attributes.profilePhoto),
-              is_official: Boolean(element.attributes.official == "no" ? false : true)
+              name: element.attributes.sender_name,
+              username: element.attributes.username,
+              id: element.attributes.userid,
+              icon: element.attributes.profilePhoto,
+              is_official: element.attributes.official == "no" ? false : true
             },
-            tags: element.attributes.tags?.map((a) => a),
-            views: String(element.attributes.visit_cnt),
+            tags: element.attributes.tags,
+            views: element.attributes.visit_cnt,
             views_int: Number(element.attributes.visit_cnt_int),
-            likes: String(element.attributes.like_cnt),
-            duration: Number(element.attributes.duration),
-            poster: String(element.attributes.big_poster),
-            preview: String(element.attributes.preview_src),
-            frame: String(element.attributes.frame),
-            publish_at: String(element.attributes.sdate_rss)
+            likes: Number(element.attributes.like_cnt),
+            duration: element.attributes.duration,
+            poster: element.attributes.big_poster,
+            preview: element.attributes.preview_src,
+            frame: element.attributes.frame,
+            publish_at: element.attributes.sdate_rss
           });
         });
-        return results2;
+        return results;
       } catch (e) {
         if (e.stack.includes("Unexpected token"))
-          return results();
-        throw new error("Video not found OwO");
+          return await videos();
+        if (e.name.startsWith("TypeError: fetch failed"))
+          throw new error_default("Connection Error \n" + e);
+        if (e.stack.includes("404"))
+          throw new error_default("Video not found OwO");
+        throw new error_default("Unexpected Error OwO\n" + e);
       }
     }
     ;
-    return results();
+    return await videos();
   }
 };
 
 // src/index.ts
-module.exports = {
+var Aparat = class extends import_node_events.EventEmitter {
+  user;
+  video;
+  constructor() {
+    super();
+    this.user = new user_default();
+    this.video = new video_default();
+  }
   /**
-   * @class
+   * 
+   * @param {string} username 
    * 
    * @description
-   * Export all function from aparat.js package.
+   * Check the user is on stream or not.
+   * 
+   * If user doesn't on a stream nothing happend.
    * 
    * @example
    * ```js
-   * const { API } = require("aparat.js");
-   * const api = new API();
+   * api.checkStream("shervinbdndev");
+   * api.once("start", async (user) => {
+   *  console.log("User is on the stream: ", user.live.url);
+   * });
    * ```
-   */ 
-  API: class API {
-    user;
-    video;
-    constructor() {
-      this.user = new User();
-      this.video = new Video();
+   */
+  async checkStream(username) {
+    let user = await this.user.search(username);
+    let is_live = false;
+    while (!is_live) {
+      user = await this.user.search(username);
+      if (user.live.is_live) {
+        is_live = true;
+        this.emit("start", user);
+      }
     }
-    /**
-     * 
-     * @param {string} username 
-     * 
-     * @description
-     * Check the user is on stream or not.
-     * 
-     * If user doesn't on a stream nothing happend.
-     * 
-     * @example
-     * ```js
-     * api.checkStream("shervinbdndev");
-     * api.once("streamStart", async (user) => {
-     *  console.log("User is on the stream: ", user.live.url);
-     * });
-     * ```
-     */
-    // checkStream(username: string) {
-    //   let user;
-    //   let name = "streamStart";
-    //   this.once(name, async () => {
-    //     user = await this.user.search(username);
-    //     if (user.live.is_live) {
-    //       this.emit(name, user);
-    //       return user;
-    //     };
-    //   });
-    //   this.emit(name, user);
-    // }
+    this.emit("start", user);
   }
 };
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  Aparat
+});

@@ -1,56 +1,58 @@
-import { User } from "./components/user";
-import { Video } from "./components/video";
-export = {
+import { EventEmitter } from "node:events";
+import user from "./components/user";
+import video from "./components/video";
+import { Events, User } from "./components/types";
+
+/**
+ * @class
+ * 
+ * @description
+ * Export all function from aparat.js package.
+ * 
+ * @example
+ * ```js
+ * const { API } = require("aparat.js");
+ * const api = new API();
+ * ```
+ */
+export class Aparat extends EventEmitter<Events> {
+  user: user;
+  video: video;
+  constructor() {
+    super();
+    this.user = new user();
+    this.video = new video();
+  };
+
   /**
-   * @class
+   * 
+   * @param {string} username 
    * 
    * @description
-   * Export all function from aparat.js package.
+   * Check the user is on stream or not.
+   * 
+   * If user doesn't on a stream nothing happend.
    * 
    * @example
    * ```js
-   * const { API } = require("aparat.js");
-   * const api = new API();
+   * api.checkStream("shervinbdndev");
+   * api.once("start", async (user) => {
+   *  console.log("User is on the stream: ", user.live.url);
+   * });
    * ```
    */
-  API: class API {
-    user: User;
-    video: Video;
-    constructor() {
-      this.user = new User();
-      this.video = new Video();
-    };
-
-    /**
-     * 
-     * @param {string} username 
-     * 
-     * @description
-     * Check the user is on stream or not.
-     * 
-     * If user doesn't on a stream nothing happend.
-     * 
-     * @example
-     * ```js
-     * api.checkStream("shervinbdndev");
-     * api.once("streamStart", async (user) => {
-     *  console.log("User is on the stream: ", user.live.url);
-     * });
-     * ```
-     */
-    // checkStream(username: string) {
-    //   let user;
-    //   let name = "streamStart";
-    //   this.once(name, async () => {
-    //     user = await this.user.search(username);
-    //     if (user.live.is_live) {
-    //       this.emit(name, user);
-    //       return user;
-    //     };
-    //   });
-    //   this.emit(name, user);
-    // }
-  } 
+  async checkStream(username: string) {
+    let user: User = await this.user.search(username);
+    let is_live = false;
+    while (!is_live) {
+      user = await this.user.search(username);
+      if (user.live.is_live) {
+        is_live = true;
+        this.emit("start", user);
+      }
+    }
+    this.emit("start", user);
+  }
 };
 /**
  * @copyright
