@@ -195,7 +195,7 @@ interface SearchVideo {
 
 ---
 
-## How search a video or get the information from it?
+## How get the information from video?
 ```js
 const { Aparat } = require("aparat.js");
 const aparat = new Aparat();
