@@ -209,7 +209,7 @@ const aparat = new Aparat();
 - Results of video information:
 ```json
 {
- "id": "54992465",
+ "id": 54992465,
  "hash_id": "n4163y7",
  "title": "بازی ترسناک باب اسفنجی در راک باتم سم کوتاه ! Spongbob Day of Terror",
  "duration": 428,
@@ -294,6 +294,7 @@ const aparat = new Aparat();
 const { Aparat, VideoQuality } = require("aparat.js");
 const aparat = new Aparat();
 (async () => {
+  
   // Dowload with custom quality and path
   await aparat.video.download("n4163y7", VideoQuality.P360, "./example/video.mp4");
 
