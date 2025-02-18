@@ -1,6 +1,6 @@
 {
   "name": "aparat.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Sobhan-SRZA (mr.sinre) & Persian Caesar",
   "description": "The aparat website services for npm package.",
   "main": "./dist/index.js",
@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
-    "test": "node ./example/"
+    "test": "npm run build && node ./example/"
   },
   "bugs": {
     "url": "https://github.com/Sobhan-SRZA/aparat.js/issues"

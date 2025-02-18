@@ -1,8 +1,11 @@
-// Re-export the main Aparat class so that it can be easily imported from this module.
-export { Aparat } from "./aparat";
+import { StreamProfile } from "./interfaces";
 
-// Re-export all enums from the enums module, making them accessible to library consumers.
-export * from "./types/enums";
+export type AparatEventTypes = {
+ "live_start": [streamer: StreamProfile];
+ "error": [error: Error];
+}
+
+export type YesOrNo = "no" | "yes";
 /**
  * @copyright
  * Code by Sobhan-SRZA (mr.sinre) | https://github.com/Sobhan-SRZA
