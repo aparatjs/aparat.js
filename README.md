@@ -355,7 +355,7 @@ MIT © [Sobhan-SRZA](https://github.com/Sobhan-SRZA) & [Persian-Caesar](https://
 ---
 
 ## Contatc
- <div align="center">
+<div align="center">
   <a href="https://srza.ir" target="_blank">
    <img align="left" src="https://raw.githubusercontent.com/Sobhan-SRZA/Sobhan-SRZA/refs/heads/main/images/social.png" alt="Sobhan-SRZA social" width=400px>
   </a>
@@ -411,6 +411,9 @@ MIT © [Sobhan-SRZA](https://github.com/Sobhan-SRZA) & [Persian-Caesar](https://
   <div align="center">
    <a href="https://discord.com/users/865630940361785345" target="_blank">
     <img alt="My Discord Account" src="https://discord.c99.nl/widget/theme-1/865630940361785345.png" />
+   </a>
+    <a href="https://discord.com/users/986314682547716117" target="_blank" align="right">
+    <img alt="Team Discord Account" src="https://discord.c99.nl/widget/theme-1/986314682547716117.png" />
    </a>
   </div>
 
