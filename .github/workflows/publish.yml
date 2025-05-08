@@ -35,18 +35,18 @@ jobs:
           echo "registry=https://npm.pkg.github.com/" >> ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PACKAGES_TOKEN }}" >> ~/.npmrc
 
-      - name: Setup Node.js for npmjs
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          registry-url: 'https://registry.npmjs.org/'
+      # - name: Setup Node.js for npmjs
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 22
+      #     registry-url: 'https://registry.npmjs.org/'
 
-      - name: Publish to npmjs.org
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # - name: Publish to npmjs.org
+      #   run: npm publish --access public
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-        continue-on-error: true
+      #   continue-on-error: true
 
       - name: Modify package name to scoped for GitHub Packages
         run: |
@@ -65,7 +65,7 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
-          
+
         continue-on-error: true
 
       - name: Restore original package name
