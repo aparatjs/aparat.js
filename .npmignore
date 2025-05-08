@@ -1,5 +1,5 @@
-/src
-/node_modules
+src
+node_modules
 .env
 tsconfig.json
-tsup.config.ts 
+package-lock.json

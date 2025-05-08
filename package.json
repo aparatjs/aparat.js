@@ -37,12 +37,7 @@
     "sobhan-srza"
   ],
   "devDependencies": {
-    "@types/node": "^22.5.0",
-    "tsup": "^8.2.4",
     "typescript": "^5.5.4"
-  },
-  "publishConfig": {
-    "@Sobhan-SRZA:registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
     "events": "^3.3.0"
