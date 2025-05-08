@@ -55,7 +55,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com/@sobhan-srza'
 
       - name: Publish to GitHub Packages
-        run: npm publish --access public
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
           
