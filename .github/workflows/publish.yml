@@ -35,25 +35,25 @@ jobs:
           echo "registry=https://npm.pkg.github.com/" >> ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PACKAGES_TOKEN }}" >> ~/.npmrc
 
-      # - name: Setup Node.js for npmjs
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 22
-      #     registry-url: 'https://registry.npmjs.org/'
+      - name: Setup Node.js for npmjs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org/'
 
-      # - name: Publish to npmjs.org
-      #   run: npm publish --access public
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish to npmjs.org
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      #   continue-on-error: true
+        continue-on-error: true
 
-      # - name: Modify package name to scoped for GitHub Packages
-      #   run: |
-      #     ORIGINAL_NAME=$(jq -r '.name' package.json)
-      #     jq '.name = "@aparatjs/aparat.js"' package.json > temp_package.json
-      #     mv temp_package.json package.json
-      #     echo $ORIGINAL_NAME > original_name.txt
+      - name: Modify package name to scoped for GitHub Packages
+        run: |
+          ORIGINAL_NAME=$(jq -r '.name' package.json)
+          jq '.name = "@aparatjs/aparat.js"' package.json > temp_package.json
+          mv temp_package.json package.json
+          echo $ORIGINAL_NAME > original_name.txt
 
       - name: Setup Node.js for GitHub Packages
         uses: actions/setup-node@v4
@@ -65,12 +65,12 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
-
+          
         continue-on-error: true
 
-      # - name: Restore original package name
-      #   run: |
-      #     ORIGINAL_NAME=$(cat original_name.txt)
-      #     jq --arg name "$ORIGINAL_NAME" '.name = $name' package.json > temp_package.json
-      #     mv temp_package.json package.json
-      #     rm original_name.txt
+      - name: Restore original package name
+        run: |
+          ORIGINAL_NAME=$(cat original_name.txt)
+          jq --arg name "$ORIGINAL_NAME" '.name = $name' package.json > temp_package.json
+          mv temp_package.json package.json
+          rm original_name.txt
