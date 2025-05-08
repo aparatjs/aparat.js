@@ -36,8 +36,7 @@
     "persian-caesar",
     "sobhan-srza"
   ],
-  "devDependencies": {
-    "@types/node": "^22.5.0",
-    "typescript": "^5.5.4"
+  "publishConfig": {
+    "@Sobhan-SRZA:registry": "https://npm.pkg.github.com"
   }
 }
