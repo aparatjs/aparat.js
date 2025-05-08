@@ -12,13 +12,13 @@
     "test": "npm run build && node ./example/"
   },
   "bugs": {
-    "url": "https://github.com/Sobhan-SRZA/aparat.js/issues"
+    "url": "https://github.com/aparatjs/aparat.js/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sobhan-SRZA/aparat.js.git"
+    "url": "git+https://github.com/aparatjs/aparat.js.git"
   },
-  "homepage": "https://github.com/Sobhan-SRZA/aparat.js#readme",
+  "homepage": "https://github.com/aparatjs/aparat.js#readme",
   "keywords": [
     "aparat.js",
     "aparat.com",
