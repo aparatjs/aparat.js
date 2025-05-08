@@ -37,9 +37,7 @@
     "sobhan-srza"
   ],
   "devDependencies": {
+    "@types/node": "^22.5.0",
     "typescript": "^5.5.4"
-  },
-  "dependencies": {
-    "events": "^3.3.0"
   }
 }

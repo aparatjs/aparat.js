@@ -1,46 +1,46 @@
 export interface ApiV1AboutResponse {
- data: ProfileMoreData;
- meta: MetaData;
+    data: ProfileMoreData;
+    meta: MetaData;
 }
 
 interface ProfileMoreData {
- type: "ProfileMore";
- id: string;
- attributes: {
-  social: Social[];
- };
+    type: "ProfileMore";
+    id: string;
+    attributes: {
+        social: Social[];
+    };
 }
 
 interface Social {
- title: SocialMediaTitle;
- username: string;
- link: string;
- icon: Icon;
+    title: SocialMediaTitle;
+    username: string;
+    link: string;
+    icon: Icon;
 }
 
 interface Icon {
- dark: string;
- light: string;
+    dark: string;
+    light: string;
 }
 
 interface MetaData {
- data: MetaDetails;
+    data: MetaDetails;
 }
 
 interface MetaDetails {
- id: string;
- username: string;
- name: string;
- description: string;
- url: string;
- video_cnt: string;
- priority: null | string;
- start_date: string;
- start_date_jalali: string;
- total_visit: string;
- total_visit_str: string;
- month_visit: string;
- month_visit_str: string;
+    id: string;
+    username: string;
+    name: string;
+    description: string;
+    url: string;
+    video_cnt: string;
+    priority: null | string;
+    start_date: string;
+    start_date_jalali: string;
+    total_visit: string;
+    total_visit_str: string;
+    month_visit: string;
+    month_visit_str: string;
 }
 
 type SocialMediaTitle = "telegram" | "instagram" | "facebook" | "instagram";

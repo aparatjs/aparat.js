@@ -1,7 +1,7 @@
 import { AparatEventEmitter } from "./core/events";
+import { VideoService } from "./services/video";
 import { UserService } from "./services/user";
 import { ApiService } from "./core/api";
-import { VideoService } from "./services/video";
 
 // The Aparat class acts as a unified interface to interact with various services.
 // It encapsulates user operations, video operations, and event handling.

@@ -1,8 +1,8 @@
 import { StreamProfile } from "./interfaces";
 
 export type AparatEventTypes = {
- "live_start": [streamer: StreamProfile];
- "error": [error: Error];
+    "live_start": [streamer: StreamProfile];
+    "error": [error: Error];
 }
 
 export type YesOrNo = "no" | "yes";

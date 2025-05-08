@@ -1,5 +1,5 @@
 // Re-export the main Aparat class so that it can be easily imported from this module.
-export { Aparat } from "./aparat";
+export * from "./aparat";
 
 // Re-export all enums from the enums module, making them accessible to library consumers.
 export * from "./types/enums";
