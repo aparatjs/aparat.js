@@ -32,21 +32,21 @@ jobs:
       - name: Configure authentication for npmjs and GitHub Packages
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
-          echo "@persian-caesar:registry=https://npm.pkg.github.com/" >> ~/.npmrc
+          echo "registry=https://npm.pkg.github.com/" >> ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PACKAGES_TOKEN }}" >> ~/.npmrc
 
-      # - name: Setup Node.js for npmjs
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 22
-      #     registry-url: 'https://registry.npmjs.org/'
+      - name: Setup Node.js for npmjs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org/'
 
-      # - name: Publish to npmjs.org
-      #   run: npm publish --access public
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish to npmjs.org
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      #   continue-on-error: true
+        continue-on-error: true
 
       - name: Setup Node.js for GitHub Packages
         uses: actions/setup-node@v4
