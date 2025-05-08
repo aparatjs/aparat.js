@@ -32,7 +32,7 @@ jobs:
       - name: Configure authentication for npmjs and GitHub Packages
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
-          echo "registry=https://npm.pkg.github.com/" >> ~/.npmrc
+          echo "@sobhan-srza:registry=https://npm.pkg.github.com/" >> ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PACKAGES_TOKEN }}" >> ~/.npmrc
 
       - name: Setup Node.js for npmjs
