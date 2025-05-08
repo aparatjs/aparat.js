@@ -1,6 +1,6 @@
 {
   "name": "@aparatjs/aparat.js",
-  "version": "0.1.01",
+  "version": "alpha-0.1.1",
   "author": "Sobhan-SRZA (mr.sinre) & Persian Caesar",
   "description": "The aparat website services for npm package.",
   "main": "./dist/index.js",
