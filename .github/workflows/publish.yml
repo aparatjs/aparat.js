@@ -2,14 +2,14 @@ name: Publish to npmjs.org & GitHub Packages
 
 on:
   release:
-    types: released
-        
+    types: [published]
+
   workflow_dispatch:
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    
+
     permissions:
       contents: read
       packages: write
@@ -18,61 +18,93 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # -------------------------
+      # Setup Node.js
+      # -------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: "22"
+          package-manager-cache: false
 
+      - name: Check Node.js and npm
+        run: |
+          node --version
+          npm --version
+          which node
+          which npm
+
+      # -------------------------
+      # Install dependencies
+      # -------------------------
       - name: Install dependencies
-        run: npm install
-        continue-on-error: true
+        run: npm ci
 
+      # -------------------------
+      # Build
+      # -------------------------
       - name: Build package
         run: npm run build
-        continue-on-error: true
 
-      - name: Configure authentication for npmjs and GitHub Packages
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
-          echo "registry=https://npm.pkg.github.com/" >> ~/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PACKAGES_TOKEN }}" >> ~/.npmrc
+      # ==================================================
+      # Publish to npmjs.org
+      # ==================================================
 
-      - name: Setup Node.js for npmjs
+      - name: Setup npmjs registry
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          registry-url: 'https://registry.npmjs.org/'
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org/"
+          package-manager-cache: false
 
       - name: Publish to npmjs.org
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-        continue-on-error: true
+      # ==================================================
+      # Prepare package for GitHub Packages
+      # ==================================================
 
-      - name: Modify package name to scoped for GitHub Packages
+      - name: Save original package name
         run: |
-          ORIGINAL_NAME=$(jq -r '.name' package.json)
+          jq -r '.name' package.json > original_name.txt
+
+      - name: Change package name for GitHub Packages
+        run: |
           jq '.name = "@aparatjs/aparat.js"' package.json > temp_package.json
           mv temp_package.json package.json
-          echo $ORIGINAL_NAME > original_name.txt
 
-      - name: Setup Node.js for GitHub Packages
+      # ==================================================
+      # Publish to GitHub Packages
+      # ==================================================
+
+      - name: Setup GitHub Packages registry
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          registry-url: 'https://npm.pkg.github.com/'
+          node-version: "22"
+          registry-url: "https://npm.pkg.github.com/"
+          scope: "@aparatjs"
+          package-manager-cache: false
 
       - name: Publish to GitHub Packages
-        run: npm publish --access public
+        run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
-          
-        continue-on-error: true
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ==================================================
+      # Restore original package.json
+      # ==================================================
 
       - name: Restore original package name
+        if: always()
         run: |
           ORIGINAL_NAME=$(cat original_name.txt)
-          jq --arg name "$ORIGINAL_NAME" '.name = $name' package.json > temp_package.json
+
+          jq --arg name "$ORIGINAL_NAME" \
+            '.name = $name' \
+            package.json > temp_package.json
+
           mv temp_package.json package.json
-          rm original_name.txt
+
+          rm -f original_name.txt
