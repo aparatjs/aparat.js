@@ -1,9 +1,9 @@
 name: Publish to npmjs.org & GitHub Packages
 
 on:
-  push:
-    branches: [ main ]
-    
+  release:
+    types: released
+        
   workflow_dispatch:
 
 jobs:
