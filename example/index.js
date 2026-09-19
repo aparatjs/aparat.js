@@ -7,7 +7,7 @@ console.log(
 console.log("-".repeat(50))
 console.log("\n")
 
-const { Aparat, VideoQuality } = require("../dist/index"); // const { Aparat } = require("aparat.js");
+const { Aparat, VideoQuality } = require("aparat.js"); 
 const aparat = new Aparat();
 
 // User information results.
