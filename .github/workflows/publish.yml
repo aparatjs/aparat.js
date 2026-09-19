@@ -73,7 +73,7 @@ jobs:
 
       - name: Change package name for GitHub Packages
         run: |
-          jq '.name = "@aparatjs/aparat.js"' package.json > temp_package.json
+          jq '.name = "@persian-caesar/aparat.js"' package.json > temp_package.json
           mv temp_package.json package.json
 
       # ==================================================
