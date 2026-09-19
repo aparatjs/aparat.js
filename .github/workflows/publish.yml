@@ -59,6 +59,7 @@ jobs:
 
       - name: Publish to npmjs.org
         run: npm publish --access public
+        continue-on-error: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -84,11 +85,12 @@ jobs:
         with:
           node-version: "22"
           registry-url: "https://npm.pkg.github.com/"
-          scope: "@aparatjs"
+          scope: "@persian-caesar"
           package-manager-cache: false
 
       - name: Publish to GitHub Packages
         run: npm publish
+        continue-on-error: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
 
